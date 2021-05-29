@@ -15,7 +15,7 @@ This project is an ESP32 based CO2 monitor using a SenseAir S8 sensor. Some addi
 - 3D printed housing
 - bonus: REST API endpoint for taking screenshots
 
-<a href="https://github.com/KlausMu/test/raw/main/images/housing_closed"><img src="https://github.com/KlausMu/test/raw/main/images/housing_closed.jpg" width="640"></a>
+<a href="https://github.com/KlausMu/esp32-co2monitor/raw/main/images/housing_closed"><img src="https://github.com/KlausMu/esp32-co2monitor/raw/main/images/housing_closed.jpg" width="640"></a>
 
 ## Credits
 Most ideas used here were inspired by the <a href="https://www.youtube.com/channel/UCu7_D0o48KbfhpEohoP7YSQ">YouTube Channel of Andreas Spiess</a> which I highly recommend if you are interested in microcontrollers and sensors. 
@@ -107,7 +107,7 @@ I used a DHT11 for measuring temperature and humidity. Unfortunately, temperatur
 
 ## Power supply
 Inspired by the video <a href="https://www.youtube.com/watch?v=joAkJ9QA2bw">#250 Universal Power Source (UPS) for only 2$. Is this possible? (Raspberry Pi, Arduino, ESP32)</a> from Andreas Spiess, I used a smart and versatile power source with a single 18650 LiIon battery. The board can both deliver 5 V and 3.3 V and can charge the battery. Perfect. (Drawbacks of the board are stated in the video).<br>
-<a href="https://github.com/KlausMu/test/raw/main/images/battery-board.png"><img src="https://github.com/KlausMu/test/raw/main/images/battery-board.png" width="300"></a>
+<a href="https://github.com/KlausMu/esp32-co2monitor/raw/main/images/battery-board.png"><img src="https://github.com/KlausMu/esp32-co2monitor/raw/main/images/battery-board.png" width="300"></a>
 
 ### Voltage monitoring
 Knowing the state of the battery is always helpful. Since the ESP32 cannot directly measure up to 4.2 V, a simple voltage divider is used. Additionally, I used a filter capacitor, but probably it works without it.
@@ -221,12 +221,12 @@ No need to change the code.
 ## Housing
 STL and STEP files for a housing are in folder "housing". Of course, it only fits if you use exactly the same components as I did. By adjusting the STEP file, you should be able to do some changes if you need to.
 
-<a href="https://github.com/KlausMu/test/raw/main/images/housing-inner1.jpg"><img src="https://github.com/KlausMu/test/raw/main/images/housing-inner1.jpg" width="300"></a>
-<a href="https://github.com/KlausMu/test/raw/main/images/housing-inner2.jpg"><img src="https://github.com/KlausMu/test/raw/main/images/housing-inner2.jpg" width="300"></a>
+<a href="https://github.com/KlausMu/esp32-co2monitor/raw/main/images/housing-inner1.jpg"><img src="https://github.com/KlausMu/esp32-co2monitor/raw/main/images/housing-inner1.jpg" width="300"></a>
+<a href="https://github.com/KlausMu/esp32-co2monitor/raw/main/images/housing-inner2.jpg"><img src="https://github.com/KlausMu/esp32-co2monitor/raw/main/images/housing-inner2.jpg" width="300"></a>
 
 ## Wiring diagram
 ![Wiring diagram](images/fritzing_CO2monitor.png)
-<a href="https://github.com/KlausMu/test/raw/main/images/housing_open.jpg"><img src="https://github.com/KlausMu/test/raw/main/images/housing_open.jpg" width="500"></a>
+<a href="https://github.com/KlausMu/esp32-co2monitor/raw/main/images/housing_open.jpg"><img src="https://github.com/KlausMu/esp32-co2monitor/raw/main/images/housing_open.jpg" width="500"></a>
 
 ## Part list
 Function | Parts | Remarks | approx. price
