@@ -109,6 +109,8 @@ I used a DHT11 for measuring temperature and humidity. Unfortunately, temperatur
 Inspired by the video <a href="https://www.youtube.com/watch?v=joAkJ9QA2bw">#250 Universal Power Source (UPS) for only 2$. Is this possible? (Raspberry Pi, Arduino, ESP32)</a> from Andreas Spiess, I used a smart and versatile power source with a single 18650 LiIon battery. The board can both deliver 5 V and 3.3 V and can charge the battery. Perfect. (Drawbacks of the board are stated in the video).<br>
 <a href="https://github.com/KlausMu/esp32-co2monitor/raw/main/images/battery-board.png"><img src="https://github.com/KlausMu/esp32-co2monitor/raw/main/images/battery-board.png" width="300"></a>
 
+With TFT turned off, one 18650 can power the device for about 15h, with TFT turned on about 8h. Both with WiFi enabled. I didn't test it with WiFi disabled.
+
 ### Voltage monitoring
 Knowing the state of the battery is always helpful. Since the ESP32 cannot directly measure up to 4.2 V, a simple voltage divider is used. Additionally, I used a filter capacitor, but probably it works without it.
 
