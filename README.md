@@ -194,10 +194,7 @@ If you want to upload new firmware OTA (over the air, which means without serial
 ```
 #define useOTAUpdate
 ```
-in the file "config.h". In that case, I recommend to also use
-```
-#define useOTA_RTOS
-```
+in the file "config.h".
 
 Please note that for uploading the first time you have to use a serial connection!
 
@@ -209,6 +206,12 @@ upload_protocol = espota
 upload_port = <ip-adress of your ESP32, see serial log>
 ```
 On how to do it with the Arduino IDE, see the video above.
+
+I recommend to activate OTA only when needed for uploading a new firmware. As soon as you activate OTA it takes about 10K of heap space, which leads to an unstable ESP32 (reboot after some days, hours or even minutes, usually when receiving a WiFi packet).
+It seems the the CO2 monitor already needs a lot of heap space for normal operation.
+Activate OTA via sending a MQTT message to "esp32_co2/cmnd/OTA" with payload "ON" and then upload the new firmware.
+
+Same holds for using a seperate thread for checking for OTA updates. Creating a seperate thread for this takes also about 10k of heap space, so I don't recommend it. I had instability issues when doing it that way. It's also fine to check for OTA updates in the main loop.
 
 ### Serial logging
 If you have no serial connection, how can you get debug messages? For this I'm using the library <a href="https://github.com/jandrassy/TelnetStream">jandrassy/TelnetStream</a>. Instead of using "Serial.print(...)" you simply use "TelnetStream.print(...)". Then you can use a telnet connection to your ESP32 to get debug messages.
