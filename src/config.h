@@ -41,7 +41,7 @@ const int VOLTAGE_PIN           = GPIO_NUM_33;   // ADC1
 
 // --- OTA Update ---------------------------------------------------------------------------------------------------------------------------
 #define useOTAUpdate
-#define useOTA_RTOS     // recommended
+// #define useOTA_RTOS     // not recommended because of additional 10K of heap space needed
 
 #if !defined(ESP32) && defined(useOTA_RTOS)
 static_assert(false, "\"#define useOTA_RTOS\" is only possible with ESP32");

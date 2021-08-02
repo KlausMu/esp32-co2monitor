@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <ArduinoOTA.h>
 #if defined(ESP32)
   #include <WiFi.h>
 #endif
@@ -66,6 +67,7 @@ bool checkMQTTconnection() {
         // mqttClient.subscribe(mqttCmndReset);
         mqttClient.subscribe(mqttCmndLogincidence);
         mqttClient.subscribe(mqttCmndLogCO2values);
+        mqttClient.subscribe(mqttCmndOTA);
       } else {
         Log.printf("  MQTT connection failed (but WiFi is available). Will try later ...\r\n");
       }
@@ -178,6 +180,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
   String topicCmndLogincidence(mqttCmndLogincidence);
   String topicCmndLogCO2values(mqttCmndLogCO2values);
+  String topicCmndOTA(mqttCmndOTA);
   if (topicReceived == topicCmndLogincidence) {
     if (strPayload == "ON") {
 
@@ -195,6 +198,16 @@ void callback(char* topic, byte* payload, unsigned int length) {
       co2values.logAllCO2values();
 
       mqtt_publish_stat_logCO2values();
+    } else {
+      Log.printf("Payload %s not supported\r\n", strPayload.c_str());
+    }
+  } else if (topicReceived == topicCmndOTA) {
+    if (strPayload == "ON") {
+      Log.printf("MQTT command TURN ON OTA received\r\n");
+      ArduinoOTA.begin();
+    } else if (strPayload == "OFF") {
+      Log.printf("MQTT command TURN OFF OTA received\r\n");
+      ArduinoOTA.end();
     } else {
       Log.printf("Payload %s not supported\r\n", strPayload.c_str());
     }

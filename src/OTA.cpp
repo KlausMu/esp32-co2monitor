@@ -86,7 +86,8 @@ void OTA_setup(const char* nameprefix) { // }, const char* ssid, const char* pas
     else if (error == OTA_END_ERROR) Serial.println("\nEnd Failed");
   });
 
-  ArduinoOTA.begin();
+  // Do not start OTA. Save heap space and start it via MQTT only when needed.
+  // ArduinoOTA.begin();
 
   Serial.println("OTA Initialized");
   Serial.print("IP address: ");

@@ -54,6 +54,7 @@ void setup()
   restAPI_setup();
 
 #if defined(useOTAUpdate)
+  // Do not start OTA. Save heap space and start it via MQTT only when needed.
   OTA_setup("CO2monitor");
 #endif
 #if defined(useTelnetStream)
