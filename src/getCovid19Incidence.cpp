@@ -25,31 +25,34 @@ bool getCovid19incidenceForRegion(IncidenceMap& incidenceMap, float& incidence, 
     "&outFields=last_update,GEN,BEZ,cases7_per_100k,death7_bl,cases7_lk,death7_lk,cases7_per_100k_txt,cases7_bl_per_100k,cases7_bl&outSR=4326&f=json&returnGeometry=false");
   http.addHeader("Content-Type", "text/plain");
   httpCode = http.GET();
-  if (httpCode > 0) { //Check for the returning code
+  if (httpCode <= 0) { //Check for the returning code
+    Log.printf("Cannot get covid19 cases. Error on HTTP request\r\n");
+  } else {
     String payload = http.getString();
     // Log.printf("payload = %s\r\n", payload.c_str());
     
     auto error = deserializeJson(rki_doc, payload);
     if (error) {
       Log.printf("Cannot get covid19 cases. deserializeJson() failed with code %s\r\n", error.c_str());
+    } else if (rki_doc["features"].size() == 0) {
+      Log.printf("Cannot get covid19 cases. Features are not included in Json.\r\n");
+    } else {
+      // strcpy(buffer, doc["features"][0]["attributes"]["BEZ"]);
+      // Log.printf("BEZ: %s\r\n", buffer);
+      // strcpy(buffer, doc["features"][0]["attributes"]["GEN"]);
+      // Log.printf("GEN: %s\r\n", buffer);
+      // strcpy(buffer, doc["features"][0]["attributes"]["cases7_per_100k_txt"]);
+      // Log.printf("cases7_per_100k_txt: %s\r\n", buffer);
+      strcpy(buffer, rki_doc["features"][0]["attributes"]["last_update"]);
+      dateOfIncidence = buffer;
+      // Log.printf("last_update: %s\r\n", buffer);
+
+      incidence = rki_doc["features"][0]["attributes"]["cases7_per_100k"];
+      // Log.printf("cases7_per_100k: %.1f\r\n", incidence);
+
+      incidenceMap.setLastUpdateFromRKI(millis());
+      res = true;
     }
-    // strcpy(buffer, doc["features"][0]["attributes"]["BEZ"]);
-    // Log.printf("BEZ: %s\r\n", buffer);
-    // strcpy(buffer, doc["features"][0]["attributes"]["GEN"]);
-    // Log.printf("GEN: %s\r\n", buffer);
-    // strcpy(buffer, doc["features"][0]["attributes"]["cases7_per_100k_txt"]);
-    // Log.printf("cases7_per_100k_txt: %s\r\n", buffer);
-    strcpy(buffer, rki_doc["features"][0]["attributes"]["last_update"]);
-    dateOfIncidence = buffer;
-    // Log.printf("last_update: %s\r\n", buffer);
-
-    incidence = rki_doc["features"][0]["attributes"]["cases7_per_100k"];
-    // Log.printf("cases7_per_100k: %.1f\r\n", incidence);
-
-    incidenceMap.setLastUpdateFromRKI(millis());
-    res = true;
-  } else {
-    Log.printf("Cannot get covid19 cases. Error on HTTP request\r\n");
   }
   http.end(); //Free the resources
   return res;
