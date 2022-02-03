@@ -64,10 +64,11 @@ bool checkMQTTconnection() {
     
         // subscribes to messages with given topic.
         // Callback function will be called 1. in client.loop() 2. when sending a message
-        // mqttClient.subscribe(mqttCmndReset);
         mqttClient.subscribe(mqttCmndLogincidence);
         mqttClient.subscribe(mqttCmndLogCO2values);
+        #if defined(useOTAUpdate)
         mqttClient.subscribe(mqttCmndOTA);
+        #endif
       } else {
         Log.printf("  MQTT connection failed (but WiFi is available). Will try later ...\r\n");
       }
@@ -182,7 +183,9 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
   String topicCmndLogincidence(mqttCmndLogincidence);
   String topicCmndLogCO2values(mqttCmndLogCO2values);
+  #if defined(useOTAUpdate)
   String topicCmndOTA(mqttCmndOTA);
+  #endif
   if (topicReceived == topicCmndLogincidence) {
     if (strPayload == "ON") {
 
@@ -203,6 +206,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     } else {
       Log.printf("Payload %s not supported\r\n", strPayload.c_str());
     }
+#if defined(useOTAUpdate)
   } else if (topicReceived == topicCmndOTA) {
     if (strPayload == "ON") {
       Log.printf("MQTT command TURN ON OTA received\r\n");
@@ -213,5 +217,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
     } else {
       Log.printf("Payload %s not supported\r\n", strPayload.c_str());
     }
+#endif
   }
 }

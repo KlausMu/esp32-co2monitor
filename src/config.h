@@ -5,12 +5,39 @@
 const char* const wifi_ssid              = "YourWifiSSID";
 const char* const wifi_password          = "YourWifiPassword";
 
+// --- OTA Update ---------------------------------------------------------------------------------------------------------------------------
+#define useOTAUpdate
+// #define useOTA_RTOS     // not recommended because of additional 10K of heap space needed
+
+#if !defined(ESP32) && defined(useOTA_RTOS)
+static_assert(false, "\"#define useOTA_RTOS\" is only possible with ESP32");
+#endif
+#if defined(useOTA_RTOS) && !defined(useOTAUpdate)
+static_assert(false, "You cannot use \"#define useOTA_RTOS\" without \"#define useOTAUpdate\"");
+#endif
+
+#define useSerial
+#define useTelnetStream
+
 // --- mqtt ---------------------------------------------------------------------------------------------------------------------------------
 const char* const mqtt_server            = "IPAddressOfYourBroker";
 const int mqtt_server_port               = 1883;
 const char* const mqtt_user              = "myUser or empty";
 const char* const mqtt_pass              = "myPassword or empty";
 const char* const mqtt_clientName        = "esp32_co2";
+
+const char* const mqttCmndLogincidence   = "esp32_co2/cmnd/LOGincidence";
+const char* const mqttStatLogincidence   = "esp32_co2/stat/LOGincidence";
+const char* const mqttCmndLogCO2values   = "esp32_co2/cmnd/LOGCO2values";
+const char* const mqttStatLogCO2values   = "esp32_co2/stat/LOGCO2values";
+
+#if defined(useOTAUpdate)
+const char* const mqttCmndOTA            = "esp32_co2/cmnd/OTA";
+#endif
+
+const char* const mqttTeleState1         = "esp32_co2/tele/STATE1";
+const char* const mqttTeleState2         = "esp32_co2/tele/STATE2";
+const char* const mqttTeleState3         = "esp32_co2/tele/STATE3";
 
 // --- DHT11 --------------------------------------------------------------------------------------------------------------------------------
 const int DHT_PIN = GPIO_NUM_32;                 // ADC1
@@ -38,20 +65,6 @@ const int LED_ON                = HIGH;
 
 // --- voltage ------------------------------------------------------------------------------------------------------------------------------
 const int VOLTAGE_PIN           = GPIO_NUM_33;   // ADC1
-
-// --- OTA Update ---------------------------------------------------------------------------------------------------------------------------
-#define useOTAUpdate
-// #define useOTA_RTOS     // not recommended because of additional 10K of heap space needed
-
-#if !defined(ESP32) && defined(useOTA_RTOS)
-static_assert(false, "\"#define useOTA_RTOS\" is only possible with ESP32");
-#endif
-#if defined(useOTA_RTOS) && !defined(useOTAUpdate)
-static_assert(false, "You cannot use \"#define useOTA_RTOS\" without \"#define useOTAUpdate\"");
-#endif
-
-#define useSerial
-#define useTelnetStream
 
 // --- language and timezone ----------------------------------------------------------------------------------------------------------------
 #include "lang/en.h"
