@@ -142,6 +142,8 @@ void mqtt_publish_tele() {
   payload += WiFi.SSID();
   payload += ",\"wifiBSSID\":";
   payload += WiFi.BSSIDstr();
+  payload += ",\"IP\":";
+  payload += WiFi.localIP().toString();
   payload += "}";
   publishMQTTMessage(mqttTeleState2, payload.c_str());
 
