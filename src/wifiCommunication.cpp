@@ -30,26 +30,26 @@ void printWiFiStatus(void){
   if (wifiIsDisabled) return;
 
   if (WiFi.isConnected()) {
-    Serial.printf(MY_LOG_FORMAT("  WiFi.status() == connected\n"));
+    Serial.printf(MY_LOG_FORMAT("  WiFi.status() == connected\r\n"));
   } else {
-    Serial.printf(MY_LOG_FORMAT("  WiFi.status() == DIS-connected\n"));
+    Serial.printf(MY_LOG_FORMAT("  WiFi.status() == DIS-connected\r\n"));
   }
   // Serial.println(WiFi.localIP());
-  Serial.printf(MY_LOG_FORMAT("  IP address: %s\n"), WiFi.localIP().toString().c_str());
+  Serial.printf(MY_LOG_FORMAT("  IP address: %s\r\n"), WiFi.localIP().toString().c_str());
 
   if (WiFi.isConnected()) { //  && WiFi.localIP().isSet()) {
-    Serial.printf(MY_LOG_FORMAT("  WiFi connected and IP is set :-)\n"));
+    Serial.printf(MY_LOG_FORMAT("  WiFi connected and IP is set :-)\r\n"));
   } else {
-    Serial.printf(MY_LOG_FORMAT("  WiFi not completely available :-(\n"));
+    Serial.printf(MY_LOG_FORMAT("  WiFi not completely available :-(\r\n"));
   }
 }
 void WiFiStationConnected(WiFiEvent_t event, WiFiEventInfo_t info){
-  Serial.printf(MY_LOG_FORMAT("  Callback \"StationConnected\"\n"));
+  Serial.printf(MY_LOG_FORMAT("  Callback \"StationConnected\"\r\n"));
 
   printWiFiStatus();
 }
 void WiFiStationDisconnected(WiFiEvent_t event, WiFiEventInfo_t info){
-  Serial.printf(MY_LOG_FORMAT("  Callback \"StationDisconnected\"\n"));
+  Serial.printf(MY_LOG_FORMAT("  Callback \"StationDisconnected\"\r\n"));
   connected = false;
 
   printWiFiStatus();
@@ -60,7 +60,7 @@ void WiFiStationDisconnected(WiFiEvent_t event, WiFiEventInfo_t info){
   }
 }
 void WiFiGotIP(WiFiEvent_t event, WiFiEventInfo_t info){
-  Serial.printf(MY_LOG_FORMAT("  Callback \"GotIP\"\n"));
+  Serial.printf(MY_LOG_FORMAT("  Callback \"GotIP\"\r\n"));
   connected = true;
   setAccessPointName();
 
@@ -74,31 +74,31 @@ void printWiFiStatus(void){
   if (wifiIsDisabled) return;
 
   if (WiFi.isConnected()) {
-    Serial.printf(MY_LOG_FORMAT("  WiFi.status() == connected\n"));
+    Serial.printf(MY_LOG_FORMAT("  WiFi.status() == connected\r\n"));
   } else {
-    Serial.printf(MY_LOG_FORMAT("  WiFi.status() == DIS-connected\n"));
+    Serial.printf(MY_LOG_FORMAT("  WiFi.status() == DIS-connected\r\n"));
   }
   // Serial.println(WiFi.localIP());
-  Serial.printf(MY_LOG_FORMAT("  IP address: %s\n"), WiFi.localIP().toString().c_str());
+  Serial.printf(MY_LOG_FORMAT("  IP address: %s\r\n"), WiFi.localIP().toString().c_str());
 
   if (WiFi.isConnected()) { //  && WiFi.localIP().isSet()) {
-    Serial.printf(MY_LOG_FORMAT("  WiFi connected and IP is set :-)\n"));
+    Serial.printf(MY_LOG_FORMAT("  WiFi connected and IP is set :-)\r\n"));
   } else {
-    Serial.printf(MY_LOG_FORMAT("  WiFi not completely available :-(\n"));
+    Serial.printf(MY_LOG_FORMAT("  WiFi not completely available :-(\r\n"));
   }
 }
 //callback on WiFi connected
 void onSTAConnected (WiFiEventStationModeConnected event_info) {
-  Serial.printf(MY_LOG_FORMAT("  Callback \"onStationModeConnected\"\n"));
+  Serial.printf(MY_LOG_FORMAT("  Callback \"onStationModeConnected\"\r\n"));
   Serial.printf(MY_LOG_FORMAT("  Connected to %s\r\n"), event_info.ssid.c_str ());
 
   printWiFiStatus();
 }
 // Manage network disconnection
 void onSTADisconnected (WiFiEventStationModeDisconnected event_info) {
-  Serial.printf(MY_LOG_FORMAT("  Callback \"onStationModeDisconnected\"\n"));
-  Serial.printf(MY_LOG_FORMAT("  Disconnected from SSID: %s\n"), event_info.ssid.c_str ());
-  Serial.printf(MY_LOG_FORMAT("  Reason: %d\n"), event_info.reason);
+  Serial.printf(MY_LOG_FORMAT("  Callback \"onStationModeDisconnected\"\r\n"));
+  Serial.printf(MY_LOG_FORMAT("  Disconnected from SSID: %s\r\n"), event_info.ssid.c_str ());
+  Serial.printf(MY_LOG_FORMAT("  Reason: %d\r\n"), event_info.reason);
   connected = false;
 
   printWiFiStatus();
@@ -111,7 +111,7 @@ void onSTADisconnected (WiFiEventStationModeDisconnected event_info) {
 //callback on got IP address
 // Start NTP only after IP network is connected
 void onSTAGotIP (WiFiEventStationModeGotIP event_info) {
-  Serial.printf(MY_LOG_FORMAT("  Callback \"onStationModeGotIP\"\n"));
+  Serial.printf(MY_LOG_FORMAT("  Callback \"onStationModeGotIP\"\r\n"));
   Serial.printf(MY_LOG_FORMAT("  Got IP: %s\r\n"), event_info.ip.toString ().c_str ());
   Serial.printf(MY_LOG_FORMAT("  Connected: %s\r\n"), WiFi.isConnected() ? "yes" : "no");
   connected = true;
