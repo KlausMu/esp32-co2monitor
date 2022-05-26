@@ -172,7 +172,7 @@ void drawCO2values() {
     // char buff[20];
     // Log.printf("  raw time %ld\r\n", dateTime);
     // strftime(buff, 20, "%Y-%m-%d %H:%M:%S", gmtime(&dateTime));
-    // Log.printf("  draw %s, %d\r\n", buff, it->second);
+    // Log.printf("  draw %s\r\n", buff);
     
     if ((dateTime < minDateTime) || (dateTime > maxDateTime)) {
       continue;

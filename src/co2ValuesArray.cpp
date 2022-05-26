@@ -147,7 +147,7 @@ void Co2valuesArray::sortValuesPendingAndSetIndex() {
 
   // set index one higher than entry with highest date 
   time_t lastDate;
-  lastDate = co2valuesPending[0].dateTime;
+  lastDate = -1.0; // co2valuesPending[0].dateTime;
   int lastDateIndex = -1;
   for (int i=0; i<numberOfCO2values; i++) {
     if (co2valuesPending[i].dateTime > lastDate) {
@@ -156,7 +156,7 @@ void Co2valuesArray::sortValuesPendingAndSetIndex() {
     }
   }
   if (lastDateIndex == -1) {
-    // still on first element
+    // no element found
     co2valuesPendingIndex = 0;  
   } else {
     co2valuesPendingIndex = (lastDateIndex +1) % numberOfCO2values;
@@ -180,7 +180,7 @@ void Co2valuesArray::sortValuesAndSetIndex() {
 
   // set index one higher than entry with highest date 
   time_t lastDate;
-  lastDate = co2values[0].dateTime;
+  lastDate = -1.0; // co2values[0].dateTime;
   int lastDateIndex = -1;
   for (int i=0; i<numberOfCO2values; i++) {
     if (co2values[i].dateTime > lastDate) {
@@ -189,7 +189,7 @@ void Co2valuesArray::sortValuesAndSetIndex() {
     }
   }
   if (lastDateIndex == -1) {
-    // still on first element
+    // no element found
     co2valuesIndex = 0;  
   } else {
     co2valuesIndex = (lastDateIndex +1) % numberOfCO2values;
