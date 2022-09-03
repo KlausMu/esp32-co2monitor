@@ -26,6 +26,7 @@
 #include <Fonts/FreeSerif12pt7b.h>
 #include <Fonts/FreeSerif18pt7b.h>
 #include <Fonts/FreeSerif24pt7b.h>
+#include <SD.h>
 
 //prepare driver for display
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);

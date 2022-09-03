@@ -8,6 +8,7 @@
 #endif
 #include <WiFiClient.h>
 #include <PubSubClient.h>
+#include <SPIFFS.h>
 
 #include "config.h"
 #include "log.h"
