@@ -139,8 +139,8 @@ void handleGetIncidence() {
 
   DynamicJsonDocument jsondoc(6144);
   time_t date;
-  float incidence;
-  char buff[20];
+  char buffDate[20];
+  char buffIncidence[20];
   String res;
   int counter = 0;
 
@@ -152,9 +152,9 @@ void handleGetIncidence() {
   for (it = aIncidenceMap->getMapIncidence().begin(); it != aIncidenceMap->getMapIncidence().end(); it++) {
     if ((pageno*100 <= counter) && (counter < (pageno*100 + 100))) {
       date = it->first;
-      incidence = it->second;
-      strftime(buff, 20, "%Y-%m-%d", gmtime(&date));
-      root[buff] = incidence;
+      strftime(buffDate, 20, "%Y-%m-%d", gmtime(&date));
+      sprintf(buffIncidence, "%.1f", it->second);
+      root[buffDate] = buffIncidence;
     }
     counter++;
   }
