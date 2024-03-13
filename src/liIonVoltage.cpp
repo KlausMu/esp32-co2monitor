@@ -1,4 +1,4 @@
-#include "LiIonVoltage.h"
+#include "liIonVoltage.h"
 
 #include "config.h"
 #include "log.h"
