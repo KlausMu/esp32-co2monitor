@@ -1,3 +1,5 @@
+![Build](https://github.com/KlausMu/esp32-co2monitor/actions/workflows/build-platformio.yml/badge.svg)
+
 # CO2 monitor
 This project is an ESP32 based CO2 monitor using a SenseAir S8 sensor. Some additional features like graphs, touch screen, and MQTT support were added to have a fully functional device. The full feature list is:
 - graphical presentation of CO2 measurements from last 24h
