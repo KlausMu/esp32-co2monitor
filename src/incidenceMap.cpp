@@ -5,7 +5,7 @@
 #include "incidenceMap.h"
 #include "storage.h"
 #include "log.h"
-#include "getCovid19incidence.h"
+#include "getCovid19Incidence.h"
 #include "timeHelper.h"
 #include "ezTime.h"
 
